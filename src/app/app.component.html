@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col-8 pt-2">
+    <div class="card">
+      <div class="card-header bg-success">
+        <h6>Player List</h6>
+      </div>
+      <div class="card-body">
+        <div class="col-12">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="text-center">
+                <th>Sr No</th> <!-- Serial Number -->
+                <th>Name</th> <!-- Player's Name -->
+                <th>Country</th> <!-- Player's Country -->
+                <th>Age</th> <!-- Player's Age -->
+                <th>Position</th> <!-- Player's Position -->
+                <th>Team</th> <!-- Player's Team -->
+                <th>Goals</th> <!-- Goals Scored -->
+                <th>Assists</th> <!-- Assists Made -->
+                <th>Matches Played</th> <!-- Matches Played -->
+                <th>Yellow Cards</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(item of playerList; track $index){
+              <tr>
+                <td>{{$index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{ item.country }}</td> <!-- Displays the player's country -->
+                <td>{{ item.age }}</td> <!-- Displays the player's age -->
+                <td>{{ item.position }}</td> <!-- Displays the player's position -->
+                <td>{{ item.team }}</td> <!-- Displays the player's team -->
+                <td>{{ item.goals }}</td> <!-- Displays the player's goals -->
+                <td>{{ item.assists }}</td> <!-- Displays the player's assists -->
+                <td>{{ item.matchesPlayed }}</td> <!-- Displays the matches played -->
+                <td>{{ item.yellowCards }}</td>
+                <td class="text-center">
+                  <button class="btn btn-primary"(click)="onEdit(item)">edit</button>
+                  <button class="btn btn-danger mx-2" (click)="onDelete(item.playerId)">Delete</button>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4 pt-2">
+    <div class="card border border-dark">
+      <div class="card-header bg-success text-white">
+        New Player
+      </div>
+      <div class="card-body">
+        <form [formGroup]="playerForm"> <!-- Corrected here -->
+          <div class="row">
+            <div class="col-12">
+              <label for="playerName">Player Name</label>
+              <input type="text" formControlName="name" class="form-control custom-input" id="playerName"
+                placeholder="Enter player's name">
+            </div>
+            <div class="col-6">
+              <label for="country">Country</label>
+              <input type="text" formControlName="country" class="form-control custom-input" id="country"
+                placeholder="Enter player's country">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="age">Age</label>
+              <input type="number" formControlName="age" class="form-control custom-input" id="age"
+                placeholder="Enter player's age">
+            </div>
+            <div class="col-6 mt-3">Q
+              <label for="position">Position</label>
+              <input type="text" formControlName="position" class="form-control custom-input" id="position"
+                placeholder="Enter player's position">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="team">Team</label>
+              <input type="text" formControlName="team" class="form-control custom-input" id="team"
+                placeholder="Enter player's team">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="goals">Goals</label>
+              <input type="number" formControlName="goals" class="form-control custom-input" id="goals"
+                placeholder="Enter goals scored">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="assists">Assists</label>
+              <input type="number" formControlName="assists" class="form-control custom-input" id="assists"
+                placeholder="Enter assists made">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="matchesPlayed">Matches Played</label>
+              <input type="number" formControlName="matchesPlayed" class="form-control custom-input" id="matchesPlayed"
+                placeholder="Enter matches played">
+            </div>
+            <div class="col-6 mt-3">
+              <label for="yellowCards">Yellow Cards</label>
+              <input type="number" formControlName="yellowCards" class="form-control custom-input" id="yellowCards"
+                placeholder="Enter yellow cards received">
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              <button type="button" class="btn btn-secondary" (click)="playerForm.reset()">Reset</button>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-6">
+              @if(playerForm.controls['playerId'].value =='1'){
+                <button type="submit" class="btn btn-success" (click)="onSave()">Save Players Data</button>
+              }@else
+              {
+                <button type="submit" class="btn btn-warning" (click)="onUpdate()">Update Employee</button>
+              }
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
